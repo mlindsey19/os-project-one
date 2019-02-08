@@ -1,0 +1,51 @@
+//
+// Created by mlind on 2/8/2019.
+//
+
+#include <getopt.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include "checkArgs.h"
+
+static void helpMenu(){
+    printf("/\n    Help\n");
+    printf("-h show help menu\n");
+    printf("-i specify input file name\n");
+    printf("-o specify output file name\n");
+}
+
+int checkArgs(char * inFilename, char * outFilename, int argc, char **argv) {
+
+
+    int c,i;
+
+    opterr = 0;
+
+    while ((c = getopt(argc, argv, "hio:")) != -1)
+        switch (c) {
+            case 'h':
+                helpMenu();
+                break;
+            case 'i':
+                inFilename = optarg;
+                break;
+            case 'o':
+                outFilename = optarg;
+                break;
+            case '?':
+                if (optopt == 'i' || optopt == 'o')
+                    fprintf(stderr, "Options -o and -i require an argument.\n", optopt);
+                else if (isprint (optopt))
+                    fprintf(stderr, "Unknown option `-%c'.\n", optopt);
+                else
+                    fprintf(stderr, "Unknown option character `\\x%x'.\n", optopt);
+                return 1;
+            default:
+                abort();
+        }
+
+    for (i = optind; i < argc; i++);
+    printf("Non-option argument %s\n", argv[i]);
+    return 0;
+}

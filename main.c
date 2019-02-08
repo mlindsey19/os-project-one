@@ -17,15 +17,13 @@
 
 
 #include "readFile.h"
+#include "child.h"
+#include "parent.h"
+#include "checkArgs.h"
 
 #define SHMKEY 63139 //shared memory key
 #define BUFF_SZ sizeof(int)
 
-void parent();
-void child();
-void helpMenu();
-
-int checkArgs(char *, char * , int , char **);
 
 
 int main (int argc, char **argv)
@@ -33,28 +31,31 @@ int main (int argc, char **argv)
 
     char *inFilename = NULL;
     char *outFilename = NULL;
-
-    checkArgs(inFilename, outFilename, argc, argv);
-    printf("%s", inFilename);
-
-    char buf[128];
-    readFile("in.txt", buf, 0);
-
-
     FILE *fPtr;
-    int i, j, x;
-
-
-    fgets(buf, 128, fPtr) ;
-    x =(int) buf[0];
-    buf[0] = '\0';
-
     pid_t  rpid;
     int status, errno;
-    pid_t childpid[x];
     char *lines[128];
+    int i, j, x;
+    char buf[128];
 
-    for (i = 0; i < x; i++)
+    checkArgs(&inFilename, &outFilename, argc, argv);
+    int c;
+
+    opterr = 0;
+
+
+    for (i = optind; i < argc; i++);
+    printf("Non-option argument %s\n", argv[i]);
+
+    printf("infilename: %s\n", inFilename);
+    printf("outfilename: %s\n", outFilename);
+
+
+    x = readFile("in.txt", buf, 0);
+    pid_t childpid[x];
+
+
+    for (i = 0; i < 0; i++)
     {
         if ((childpid[i] = fork()) < 0 )
         {

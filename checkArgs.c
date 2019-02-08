@@ -15,23 +15,24 @@ static void helpMenu(){
     printf("-o specify output file name\n");
 }
 
-int checkArgs(char * inFilename, char * outFilename, int argc, char **argv) {
+int checkArgs(char * inFilename[], char * outFilename[], int argc, char **argv) {
 
 
     int c,i;
 
     opterr = 0;
 
-    while ((c = getopt(argc, argv, "hio:")) != -1)
+    while ((c = getopt(argc, argv, "hi:o:")) != -1)
         switch (c) {
             case 'h':
                 helpMenu();
                 break;
             case 'i':
-                inFilename = optarg;
+                *inFilename = optarg;
+                printf("from func: infile: %s\n", *inFilename);
                 break;
             case 'o':
-                outFilename = optarg;
+                *outFilename = optarg;
                 break;
             case '?':
                 if (optopt == 'i' || optopt == 'o')

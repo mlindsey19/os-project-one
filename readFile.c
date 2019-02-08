@@ -7,13 +7,31 @@
 #include <stdlib.h>
 #include "readFile.h"
 
+static int readFile2(const char * fileName)
+{
+    FILE *fPtr;
+    int x = 0;
+
+    fPtr = fopen("in.txt", "r");
+    if (!fPtr) {
+        perror("could not open file");
+        return 1;
+    }
+    x =  fgetc(fPtr);
+
+    fclose(fPtr);
+    return  x;
+}
 
 int  readFile(const char * fileName, char * buf,  int lineNumber)
 {
 
+    if (lineNumber == 0){
+        return readFile2(fileName);
+    }
     FILE *fPtr;
     int x = 0;
-    char * temp;
+    char * temp = NULL;
 
     fPtr = fopen("in.txt", "r");
     if (!fPtr) {
@@ -33,3 +51,4 @@ int  readFile(const char * fileName, char * buf,  int lineNumber)
     fclose(fPtr);
     return  0;
 }
+

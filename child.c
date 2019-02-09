@@ -14,7 +14,7 @@
 
 void child( const char * infilename,const char * outfilename,int *x, int  *pos)
 {
-    int p[2];
+    int p[128];
     int thislong = 1 + pos[0] / 4;
     sleep(thislong);
     int shmid = shmget (SHMKEY, sizeof(p[2]), 0777);

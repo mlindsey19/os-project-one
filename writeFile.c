@@ -12,7 +12,6 @@
 
 int writeFile(const char * outfilename, int temp[], int n){
     pid_t currentpid = getpid();
-    assert(currentpid != 0);
     FILE *fPtr = fopen(outfilename, "a");
     if (!fPtr) {
         perror("wf: could not open file");

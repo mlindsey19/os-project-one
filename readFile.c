@@ -23,8 +23,6 @@ static int getNextInt(const char * fileName, int * x, int *pos)
     fscanf(fPtr, "%d", x);
 
     *pos = (int) ftell(fPtr);
-    printf("pos: %d\n",*pos);
-    printf("x: %d\n",*x);
 
     fclose(fPtr);
     return  0;
@@ -34,7 +32,7 @@ int  readFile(const char * infileName,const char *outfilename, int * x,  int *po
 {
     int i = 0; // iterator
     if (*pos == 0) {
-        getNextInt(infileName, x, pos);
+        getNextInt(infileName, x, pos); // gets first line
         return 0;
     }
     if (*pos != 0 ){

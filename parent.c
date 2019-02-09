@@ -11,7 +11,7 @@
 int * parent()
 {
 //get shared memory id
-int pos[2];
+int pos[128];
     int shmid = shmget (SHMKEY, sizeof(pos[2]) , 0777 | IPC_CREAT);
 
     if ( shmid == -1 )
@@ -22,7 +22,7 @@ int pos[2];
     // get pointer to shared block
     char *paddr = ( char * ) ( shmat ( shmid, 0, 0 ) );
     int * pint = ( int *)( paddr );
-    pint[0] = 0;
-    pint[1] = 1;
+    pint[0]=0;
+    pint[1]= 0;
     return pint;
 }

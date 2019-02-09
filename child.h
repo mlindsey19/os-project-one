@@ -1,5 +1,6 @@
-//
-// Created by mlind on 2/7/2019.
+//David Lindsey
+//cs4760
+//2-5-19
 //
 
 #ifndef LINDSEY_1_CHILD_H

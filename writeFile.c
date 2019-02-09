@@ -1,7 +1,7 @@
+//David Lindsey
+//cs4760
+//2-5-19
 //
-// Created by mlind on 2/8/2019.
-//
-
 #include "writeFile.h"
 #include <sys/types.h>
 #include <stdio.h>
@@ -19,13 +19,13 @@ int writeFile(const char * outfilename, int temp[], int n){
     }
 
     char  string[50] = "";
-    sprintf(string, "%d: ", currentpid);
+    sprintf(string, "%d: ", currentpid); // concatenate pid of child reading this line
 
     int i =0;
-    for (i = n ; i > 0; i--){
+    for (i = n ; i > 0; i--){ //creats a string of integers from line read in reverse order
         sprintf(string, "%s %d", string, temp[i - 1]);
     }
-    fprintf(fPtr, "%s\n", string);
+    fprintf(fPtr, "%s\n", string); //write final formated line to file
 
     fclose(fPtr);
 

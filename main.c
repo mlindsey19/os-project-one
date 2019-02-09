@@ -33,19 +33,25 @@ int main (int argc, char **argv)
     pid_t  currentpid;
     int errno;
     int i, x;
-    int * pos;
+    int * pos; // first integer at pos address is the current read position for the file
+    //              the second shared integer space is for the parent id so that only
+    //              the parent can fork() - the remaining 126 are for child pid's to be
+    //              written to file
 
     checkArgs(&inFilename, &outFilename, argc, argv);
 
-    pos = parent();
-    readFile(inFilename, outFilename, &x, pos);
+    pos = parent();// returns pointer to shared memory that parent() creates IPC_CREAT
 
-    const int K = x;
+    readFile(inFilename, outFilename, &x, pos);// read file calls write file so infile and outfile names
+    //                                          are passed. x: first integer(number of processes to fork())
+    //                                          pos is passed to keep track of position in file
+
+    const int K = x; //number of processes
     assert(K < 126 && "there is only enough shared memory for 126 child pids");
 
     for (i = 0; i < K; i++) {
         if (i==0)
-            pos[1] = getppid();
+            pos[1] = getppid(); // only parent writes pid to this to verify only parent will fork()
 
 
         if (getppid() == pos[1] ) {
@@ -73,10 +79,10 @@ int main (int argc, char **argv)
         char  string[50] = "";
 
         for (i = 2 ; i < (K + 2); i++){
-            sprintf(string, "%s %d", string, pos[i]);
+            sprintf(string, "%s %d", string, pos[i]); //concatenate all child pids
         }
 
-        fprintf(fPtr, "%s: %s\n","all child", string);
+        fprintf(fPtr, "%s: %s\n","all child", string); //append to begging of string
 
         fclose(fPtr);
     }

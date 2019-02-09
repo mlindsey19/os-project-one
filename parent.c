@@ -1,5 +1,6 @@
-//
-// Created by mlind on 2/7/2019.
+//David Lindsey
+//cs4760
+//2-5-19
 //
 
 #include <sys/shm.h>
@@ -22,7 +23,7 @@ int pos[128];
     // get pointer to shared block
     char *paddr = ( char * ) ( shmat ( shmid, 0, 0 ) );
     int * pint = ( int *)( paddr );
-    pint[0]=0;
-    pint[1]= 0;
+    pint[0]=0; // set file position to 0 so first integer is read
+
     return pint;
 }

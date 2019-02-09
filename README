@@ -1,1 +1,15 @@
-add stuff here
+written by Mitch Lindsey (david)
+
+this is the first project for cs4760 sp-2019
+
+this program read a file with some integers formatted similarly to this:
+3
+6
+3 6 107 8 1 3
+4
+1 3 50 4
+7
+5 3 5 7 8 9 1
+
+it creates a child process to read each line and write it to file in reverse
+

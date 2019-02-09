@@ -1,7 +1,7 @@
+//David Lindsey
+//cs4760
+//2-5-19
 //
-// Created by mlind on 2/8/2019.
-//
-
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>

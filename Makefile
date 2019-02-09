@@ -7,6 +7,8 @@ CC = gcc
 CFLAGS = -g -Wall
 
 OBJ = main.o child.o parent.o checkArgs.o readFile.o writeFile.o
+TARGET = a.out
+.SUFFIXES: .c .o
 
 a.out: $(OBJ)
 	$(CC)  $(CFLAGS) $(OBJ)
@@ -24,4 +26,4 @@ readFile.o: readFile.c
 writeFile.o: writeFile.c
 	$(CC) $(CFLAGS) -c writeFile.c
 clean:
-	rm a.out $(OBJ) output.dat
+	rm $(TARGET) *.o output.dat

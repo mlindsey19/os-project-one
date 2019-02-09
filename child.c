@@ -7,20 +7,23 @@
 #include <stdio.h>
 
 #include "child.h"
+#include "parent.h"
+#include "readFile.h"
 
-void child()
+void child( const char * infilename,const char * outfilename,int *x, int  *pos)
 {
-    sleep(5);
+
+    sleep(*pos);
     int shmid = shmget (SHMKEY, BUFF_SZ, 0777);
-    char buf[128];
 
     if (shmid == -1)
     {
         perror("child: Error shmid");
     }
 
+   pos = ( int * ) ( shmat ( shmid, 0, 0 ) );
 
-   int *cint = ( int * ) ( shmat ( shmid, 0, 0 ) );
+    readFile(infilename, outfilename, x,  pos);
 
 
 }

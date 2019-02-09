@@ -6,7 +6,7 @@
 CC = gcc
 CFLAGS = -g -Wall
 
-OBJ = main.o child.o parent.o checkArgs.o readFile.o
+OBJ = main.o child.o parent.o checkArgs.o readFile.o writeFile.o
 
 a.out: $(OBJ)
 	$(CC)  $(CFLAGS) $(OBJ)
@@ -21,6 +21,7 @@ child.o: child.c
 	$(CC) $(CFLAGS) -c child.c
 readFile.o: readFile.c
 	$(CC) $(CFLAGS) -c readFile.c
-
+writeFile.o: writeFile.c
+	$(CC) $(CFLAGS) -c writeFile.c
 clean:
 	rm a.out $(OBJ)

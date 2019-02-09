@@ -21,51 +21,38 @@
 #include "parent.h"
 #include "checkArgs.h"
 
-#define SHMKEY 63139 //shared memory key
-#define BUFF_SZ sizeof(int)
 
 
 
 int main (int argc, char **argv)
 {
 
-    char *inFilename = NULL;
-    char *outFilename = NULL;
-    FILE *fPtr;
-    pid_t  rpid;
+    char *inFilename = "input.dat";
+    char *outFilename = "output.dat";
+    pid_t  currentpid;
     int status, errno;
-    char *lines[128];
     int i, j, x;
-    char buf[128];
+    int * pos;
+
 
     checkArgs(&inFilename, &outFilename, argc, argv);
-    int c;
 
-    opterr = 0;
-
-
-    for (i = optind; i < argc; i++);
-    printf("Non-option argument %s\n", argv[i]);
-
-    printf("infilename: %s\n", inFilename);
-    printf("outfilename: %s\n", outFilename);
+    pos = parent();
+    readFile(inFilename, outFilename, &x, pos);
 
 
-    x = readFile("in.txt", buf, 0);
-    pid_t childpid[x];
+    printf("x: %i\n", x);
 
-
-    for (i = 0; i < 0; i++)
-    {
-        if ((childpid[i] = fork()) < 0 )
-        {
-            perror ( "error forking child" );
-            return(1);
-        }
-        if (childpid[i] )
-        {
-            child();
-        }
+    for (i = 0; i < x; i++) {
+        if (currentpid == 0) {
+            if ((currentpid = fork()) < 0) {
+                perror("error forking child");
+                return (1);
+            }
+            if (currentpid != 0) {
+                child(inFilename, outFilename, x, pos);
+            }
+        } wait(NULL);
     }
 
     parent();

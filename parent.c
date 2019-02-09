@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include "parent.h"
 
-void parent()
+int * parent()
 {
 //get shared memory id
 
@@ -20,6 +20,5 @@ void parent()
     // get pointer to shared block
     char *paddr = ( char * ) ( shmat ( shmid, 0, 0 ) );
     int * pint = ( int *)( paddr );
-    pint = 0;
-
+    *pint = 0;
 }

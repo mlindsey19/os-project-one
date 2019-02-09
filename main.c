@@ -14,6 +14,7 @@
 #include <sys/shm.h>
 #include <signal.h>
 #include <errno.h>
+#include <assert.h>
 
 
 #include "readFile.h"
@@ -29,33 +30,39 @@ int main (int argc, char **argv)
 
     char *inFilename = "input.dat";
     char *outFilename = "output.dat";
-    pid_t  currentpid;
-    int status, errno;
-    int i, j, x;
+    pid_t  currentpid,childpid;
+    int errno, status;
+    int i, x;
     int * pos;
-
 
     checkArgs(&inFilename, &outFilename, argc, argv);
 
     pos = parent();
     readFile(inFilename, outFilename, &x, pos);
 
+    const int K = x;
+    assert(K == 3);
 
-    printf("x: %i\n", x);
+    for (i = 0; i < K; i++) {
+        if (i==0)
+            pos[1] = getppid();
 
-    for (i = 0; i < x; i++) {
-        if (currentpid == 0) {
-            if ((currentpid = fork()) < 0) {
+        pos[K+1] = currentpid;
+
+        if (getppid() == pos[1] ) {
+            wait(NULL);
+            if ((currentpid = fork() < 0)) {
                 perror("error forking child");
                 return (1);
             }
-            if (currentpid != 0) {
-                child(inFilename, outFilename, x, pos);
-            }
-        } wait(NULL);
-    }
+            if (getppid() != pos[1]) {
+                child(inFilename, outFilename, &x, pos);
 
-    parent();
+            }
+        }
+            printf("childpid: %d\n", childpid);
+
+    }
 
     wait(NULL);
     return 0;

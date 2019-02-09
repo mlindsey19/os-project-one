@@ -24,4 +24,4 @@ readFile.o: readFile.c
 writeFile.o: writeFile.c
 	$(CC) $(CFLAGS) -c writeFile.c
 clean:
-	rm a.out $(OBJ)
+	rm a.out $(OBJ) output.dat

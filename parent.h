@@ -6,7 +6,6 @@
 #define LINDSEY_1_PARENT_H
 
 #define SHMKEY 63139 //shared memory key
-#define BUFF_SZ sizeof(int)
 
 int * parent();
 

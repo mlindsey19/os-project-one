@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include "readFile.h"
 #include "writeFile.h"
+#include <assert.h>
+
 
 static int getNextInt(const char * fileName, int * x, int *pos)
 {
@@ -22,18 +24,22 @@ static int getNextInt(const char * fileName, int * x, int *pos)
 
     *pos = (int) ftell(fPtr);
     printf("pos: %d\n",*pos);
+    printf("x: %d\n",*x);
+
     fclose(fPtr);
     return  0;
 }
 
 int  readFile(const char * infileName,const char *outfilename, int * x,  int *pos)
 {
-    int i =0; // iterator
-    if (*pos == 0)
-    getNextInt(infileName, x, pos);
+    int i = 0; // iterator
+    if (*pos == 0) {
+        getNextInt(infileName, x, pos);
+        return 0;
+    }
     if (*pos != 0 ){
         getNextInt(infileName, x, pos);
-        int n =*x;
+        const int n = *x;
         int temp[n];
         for (i = 0; i < n; i++){
             getNextInt(infileName, x, pos);

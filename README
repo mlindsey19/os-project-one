@@ -13,19 +13,3 @@ this program read a file with some integers formatted similarly to this:
 
 it creates a child process to read each line and write it to file in reverse
 
-
-this project is not late for lack of trying. I spent a good amount of time working on other projects
-namley learning pascal. I also spent too much time setting up my develpment enronment.
-the latter slowed me down for this project but should be a boost to my productivity the rest of the 
-sememster. The last set back I had was that we hardly covered fork() in my 2750 so I had to catch up 
-a bit.  I am taking 15hrs this semester so this is making me consider if I have the time to take OS 
-this semester. I am hoping you will let me turn this in late, esp since the other OS class is two lectures
-ahead and there project was extended. I will not be asking again in the sememster, only since it was the first
-project and I needed some extra time to get back into C programming.
-
-I turned in some garbage code wednesday night just to get something in before the deadline. it ened up shutting my
-computer off when I ran it. I started over so all my git logs are different and dated after. This was becuase I wanted to organized my project differently and I didnt want to use Clions version controll, after I was able to set up
-the embed terminal to run linux I did all my git control from there. This also let me gitignore the CMAKE files
-Clion adds
-
--Mitch Lindsey

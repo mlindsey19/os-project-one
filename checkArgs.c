@@ -46,7 +46,7 @@ int checkArgs(char * inFilename[], char * outFilename[], int argc, char **argv) 
                 abort();
         }
 
-    for (i = optind; i < argc; i++);
-    printf("Non-option argument %s\n", argv[i]);
+    for (i = optind; i < argc; i++)
+    	printf("Non-option argument %s\n", argv[i]);
     return 0;
 }
